@@ -1,0 +1,74 @@
+.form-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.form-container {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  width: 90%;
+  max-width: 500px;
+  box-sizing: border-box; 
+}
+
+.form-container input,
+.form-container textarea,
+.form-container select {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-sizing: border-box; 
+  font-family: inherit;
+}
+
+.form-container textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+.form-buttons {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+  margin-top: 15px;
+}
+
+.form-buttons button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.form-buttons button[type="submit"] {
+  background: #007bff;
+  color: white;
+}
+
+.form-buttons button[type="button"] {
+  background: #6c757d;
+  color: white;
+}
+
+.form-buttons button:hover {
+  opacity: 0.9;
+}
+
+/* Add some spacing and typography */
+.form-container h3 {
+  margin-top: 0;
+  color: #333;
+  text-align: center;
+}
