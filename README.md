@@ -1,70 +1,112 @@
-# Getting Started with Create React App
+# CommunityWatch 
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+**Connecting Communities, Fixing Neighborhoods**  
+*Supporting UN Sustainable Development Goal #11 - Sustainable Cities and Communities*
 
-## Available Scripts
+## Project Overview
 
-In the project directory, you can run:
+CommunityWatch is a zone-based community issue tracking platform that enables residents to report neighborhood problems and allows local administrators to efficiently manage and resolve them. Our platform bridges the gap between citizens and local authorities through technology-enabled civic engagement.
 
-### `npm start`
+## Live Demo
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- **Frontend**: [Coming Soon]
+- **Backend API**: [Coming Soon] 
+- **Pitch Deck**: [[View Pitch Deck Here](https://www.canva.com/design/DAG0Rs1xhdM/M9auBv4CtpLwpYWDVO9CnQ/view?utm_content=DAG0Rs1xhdM&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h65c9c25458)]
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Features
 
-### `npm test`
+### For Residents 
+- Interactive Map Interface - Click exact locations to report issues
+- Anonymous Reporting - No account required
+- Real-time Issue Tracking - Monitor resolution progress  
+- Community Engagement - Upvote and comment on issues
+- Zone-based Visualization - Color-coded problem areas
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### For Administrators 
+- Centralized Dashboard - View all reported issues
+- Status Management - Update issue progress
+- Analytics & Insights - Zone statistics and resolution rates
+- Priority Setting - Data-driven resource allocation
 
-### `npm run build`
+## Technical Stack
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Frontend
+- React.js - user interface components
+- Leaflet.js - interactive mapping
+- CSS3 - responsive styling
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+### Backend
+- Node.js - runtime environment
+- Express.js - web application framework for API requests
+- MongoDB - NoSQL database
+- Mongoose - MongoDB object modelling
 
 ### Deployment
+- Netlify (Frontend)
+- Render (Backend)
+- MongoDB Atlas (Database)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+## How It Works
 
-### `npm run build` fails to minify
+1. **Browse Map** - View existing issues on interactive map
+2. **Report Problem** - Click location and fill issue details  
+3. **Track Progress** - Monitor status updates
+4. **Engage** - Support issues through upvotes and comments
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## Project Structure
+
+communitywatch-app/
+├──  LICENSE
+├──  README.md
+├──  package.json
+├──  package-lock.json
+├──  public/
+│   ├──  index.html
+│   ├──  favicon.ico
+│   ├──  logo192.png
+│   ├──  logo512.png
+│   ├──  manifest.json
+│   └──  robots.txt
+├── 📁 src/
+│   ├──  App.js
+│   ├──  MapComponent.js
+│   ├──  MapComponent.css
+│   ├──  IssueForm.js
+│   ├──  IssueForm.css
+│   ├──  index.js
+│   ├──  App.css
+│   ├──  index.css
+│   └──  logo.svg
+└──  .gitignore
+
+## Installation
+
+### Prerequisites
+- Node.js (v14 or higher)
+- MongoDB Atlas account
+- Git
+
+```bash
+git clone https://github.com/yourusername/CommunityWatch.git
+cd CommunityWatch
+npm install
+npm start
+```
+
+## Future Enhancements
+- User authentication system
+- Image upload for issue evidence
+- Mobile app development
+- SMS/Email notifications
+- Advanced analytics dashboard
+- Multi-language support
+
+## License
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## Development Team
+- Natalie - Full Stack Developer
+@Keli281
+
+- Austin - Full Stack Developer
+@Hlaustink
