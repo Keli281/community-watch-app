@@ -1,9 +1,27 @@
-.map-container {
-  margin: 20px;
+.map-layout {
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  gap: 2rem;
+  align-items: start;
 }
 
-.leaflet-container {
-  height: 500px;
-  width: 100%;
+.map-section {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.map-container {
+  background: white;
   border-radius: 10px;
+  padding: 1rem;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .map-layout {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
 }
