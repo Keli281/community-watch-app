@@ -14,32 +14,13 @@ L.Icon.Default.mergeOptions({
   shadowUrl: require('leaflet/dist/images/marker-shadow.png'),
 });
 
-// Database functions
-const saveIssueToDB = async (issueData) => {
-  try {
-    const response = await fetch('http://localhost:5000/api/issues', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(issueData)
-    });
-    
-    if (!response.ok) throw new Error('Failed to save issue');
-    
-    const savedIssue = await response.json();
-    console.log('Issue saved to database:', savedIssue);
-    return savedIssue;
-  } catch (error) {
-    console.error('Error saving issue:', error);
-    alert('Failed to save issue to database. Please check if backend is running.');
-    return null;
-  }
-};
+// API base URL with fallback for local development
+const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
 
+// Database functions
 const loadIssuesFromDB = async () => {
   try {
-    const response = await fetch('http://localhost:5000/api/issues');
+    const response = await fetch(`${API_BASE_URL}/issues`);
     
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
@@ -102,22 +83,15 @@ function MapComponent() {
     setSelectedPin(null);
   };
 
-  const handleSaveIssue = async (issueData) => {
+  const handleSaveIssue = async () => {
+    // This function is now just for refreshing the issues list
+    // The actual saving is handled in IssueForm.js
     try {
-      console.log('Saving issue to database:', issueData);
-      const savedIssue = await saveIssueToDB(issueData);
-      
-      if (savedIssue) {
-        alert(`Issue "${issueData.title}" saved successfully!`);
-        // Reload issues to include the new one
-        const issues = await loadIssuesFromDB();
-        setSavedIssues(issues);
-      } else {
-        alert('Failed to save issue. Please try again.');
-      }
+      console.log('Refreshing issues list after save...');
+      const issues = await loadIssuesFromDB();
+      setSavedIssues(issues);
     } catch (error) {
-      console.error('Error in handleSaveIssue:', error);
-      alert('Failed to save issue. Please try again.');
+      console.error('Error refreshing issues:', error);
     }
   };
 
@@ -162,6 +136,8 @@ function MapComponent() {
                   <br />
                   {issue.description}
                   <br />
+                  <strong>📍 Location:</strong> {issue.location || 'Not specified'}
+                  <br />
                   <em>Status: {issue.status}</em>
                 </Popup>
               </Marker>
@@ -174,7 +150,7 @@ function MapComponent() {
           <IssueForm 
             coordinates={selectedPin}
             onClose={handleCloseForm}
-            onSave={handleSaveIssue}
+            onSave={handleSaveIssue} // This just refreshes the list now
           />
         )}
       </div>

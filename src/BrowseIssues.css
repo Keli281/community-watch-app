@@ -469,6 +469,37 @@
   transform: scale(1.05);
 }
 
+/* NEW: Location display styles */
+.issue-location {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 1rem 0;
+  padding: 0.5rem;
+  background: #f8f9fa;
+  border-radius: 8px;
+  border-left: 3px solid #667eea;
+}
+
+.location-icon {
+  font-size: 0.9rem;
+}
+
+.location-text {
+  font-size: 0.85rem;
+  color: #495057;
+  font-weight: 500;
+}
+
+.issue-location-modal {
+  margin: 0.5rem 0 0 0;
+  padding: 0.5rem;
+  background: #e9ecef;
+  border-radius: 5px;
+  font-size: 0.9rem;
+  color: #495057;
+}
+
 /* Responsive Modal */
 @media (max-width: 768px) {
   .comment-modal {

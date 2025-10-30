@@ -4,32 +4,66 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.7);
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 1000;
+  padding: 1rem;
 }
 
 .form-container {
   background: white;
-  padding: 20px;
-  border-radius: 10px;
+  padding: 2rem;
+  border-radius: 15px;
   width: 90%;
   max-width: 500px;
-  box-sizing: border-box; 
+  box-sizing: border-box;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+  animation: formSlideIn 0.3s ease-out;
+}
+
+@keyframes formSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-50px) scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.form-container h3 {
+  margin-top: 0;
+  color: #2d3748;
+  text-align: center;
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+  border-bottom: 2px solid #667eea;
+  padding-bottom: 0.5rem;
 }
 
 .form-container input,
 .form-container textarea,
 .form-container select {
   width: 100%;
-  padding: 10px;
-  margin: 10px 0;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  box-sizing: border-box; 
+  padding: 1rem;
+  margin: 0.8rem 0;
+  border: 2px solid #e9ecef;
+  border-radius: 8px;
+  box-sizing: border-box;
   font-family: inherit;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.form-container input:focus,
+.form-container textarea:focus,
+.form-container select:focus {
+  outline: none;
+  border-color: #667eea;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
 }
 
 .form-container textarea {
@@ -37,24 +71,36 @@
   min-height: 80px;
 }
 
+.form-container input::placeholder,
+.form-container textarea::placeholder {
+  color: #a0aec0;
+}
+
 .form-buttons {
   display: flex;
-  gap: 10px;
+  gap: 1rem;
   justify-content: flex-end;
-  margin-top: 15px;
+  margin-top: 1.5rem;
 }
 
 .form-buttons button {
-  padding: 10px 20px;
+  padding: 1rem 2rem;
   border: none;
-  border-radius: 5px;
+  border-radius: 8px;
   cursor: pointer;
-  font-size: 14px;
+  font-size: 1rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
 }
 
 .form-buttons button[type="submit"] {
-  background: #007bff;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   color: white;
+}
+
+.form-buttons button[type="submit"]:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
 }
 
 .form-buttons button[type="button"] {
@@ -62,13 +108,23 @@
   color: white;
 }
 
-.form-buttons button:hover {
-  opacity: 0.9;
+.form-buttons button[type="button"]:hover {
+  background: #5a6268;
+  transform: translateY(-1px);
 }
 
-/* Add some spacing and typography */
-.form-container h3 {
-  margin-top: 0;
-  color: #333;
-  text-align: center;
+/* Responsive Design */
+@media (max-width: 768px) {
+  .form-container {
+    padding: 1.5rem;
+    margin: 1rem;
+  }
+  
+  .form-buttons {
+    flex-direction: column;
+  }
+  
+  .form-buttons button {
+    width: 100%;
+  }
 }

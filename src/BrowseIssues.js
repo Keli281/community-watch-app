@@ -2,6 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import './BrowseIssues.css';
 
+// API base URL with fallback for local development
+const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
+
 function BrowseIssues() {
   const [issues, setIssues] = useState([]);
   const [filteredIssues, setFilteredIssues] = useState([]);
@@ -24,7 +27,7 @@ function BrowseIssues() {
   const loadIssuesFromAPI = async () => {
     try {
       setLoading(true);
-      const response = await fetch('http://localhost:5000/api/issues');
+      const response = await fetch(`${API_BASE_URL}/issues`);
       
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
@@ -50,7 +53,8 @@ function BrowseIssues() {
     if (searchTerm) {
       result = result.filter(issue => 
         issue.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        issue.description.toLowerCase().includes(searchTerm.toLowerCase())
+        issue.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        (issue.zone && issue.zone.toLowerCase().includes(searchTerm.toLowerCase()))
       );
     }
 
@@ -89,7 +93,7 @@ function BrowseIssues() {
     try {
       console.log('🔄 Attempting to upvote issue:', issueId);
       
-      const response = await fetch(`http://localhost:5000/api/issues/${issueId}/upvote`, {
+      const response = await fetch(`${API_BASE_URL}/issues/${issueId}/upvote`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -136,7 +140,7 @@ function BrowseIssues() {
     }
 
     try {
-      const response = await fetch(`http://localhost:5000/api/issues/${selectedIssue._id}/comments`, {
+      const response = await fetch(`${API_BASE_URL}/issues/${selectedIssue._id}/comments`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -194,6 +198,27 @@ function BrowseIssues() {
     });
   };
 
+  // REPLACE the formatLocation function with this:
+const formatLocation = (issue) => {
+  // Priority 1: Use the human-readable location if available
+  if (issue.location && issue.location.trim() !== '') {
+    return issue.location;
+  }
+  
+  // Priority 2: Use zone name if available
+  if (issue.zone && issue.zone !== 'General') {
+    return `${issue.zone.charAt(0).toUpperCase() + issue.zone.slice(1)} Zone`;
+  }
+  
+  // Priority 3: Fallback to coordinates (but this shouldn't happen with our new form)
+  if (issue.coordinates) {
+    const lat = issue.coordinates.lat?.toFixed(4) || 'N/A';
+    const lng = issue.coordinates.lng?.toFixed(4) || 'N/A';
+    return `Coordinates: ${lat}, ${lng}`;
+  }
+  
+  return 'Location not specified';
+};
   if (loading) {
     return (
       <div className="browse-issues">
@@ -223,7 +248,7 @@ function BrowseIssues() {
         <div className="search-box">
           <input
             type="text"
-            placeholder="Search issues..."
+            placeholder="Search issues by title, description, or location..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             className="search-input"
@@ -298,6 +323,12 @@ function BrowseIssues() {
               <h3 className="issue-title">{issue.title}</h3>
               <p className="issue-description">{issue.description}</p>
 
+              {/* NEW: Location Display */}
+              <div className="issue-location">
+                <span className="location-icon">📍</span>
+                <span className="location-text">{formatLocation(issue)}</span>
+              </div>
+
               <div className="issue-footer">
                 <div className="engagement">
                   <button 
@@ -336,6 +367,10 @@ function BrowseIssues() {
               <div className="issue-preview">
                 <strong>{selectedIssue.title}</strong>
                 <p>{selectedIssue.description}</p>
+                {/* NEW: Show location in modal too */}
+                <p className="issue-location-modal">
+                  <strong>📍 Location:</strong> {formatLocation(selectedIssue)}
+                </p>
               </div>
 
               <div className="existing-comments">

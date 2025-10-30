@@ -1,4 +1,3 @@
-
 # dependencies
 /node_modules
 /.pnp
@@ -17,8 +16,27 @@
 .env.test.local
 .env.production.local
 .env
-
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
+# Backend specific
+backend/node_modules/
+backend/.env
+*.log
+
+# Environment variables (keep all .env files ignored)
+*.env
+
+# IDE
+.vscode/
+.idea/
+
+# OS generated files
+Thumbs.db
+
+# Optional npm cache directory
+.npm
+
+# Optional eslint cache
+.eslintcache

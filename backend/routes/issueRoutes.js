@@ -73,4 +73,24 @@ router.post('/:id/comments', async (req, res) => {
   }
 });
 
+// NEW: Update issue status
+router.put('/:id/status', async (req, res) => {
+  try {
+    const { status } = req.body;
+    const issue = await Issue.findByIdAndUpdate(
+      req.params.id,
+      { status: status, updatedAt: new Date() },
+      { new: true } // Return the updated document
+    );
+    
+    if (!issue) {
+      return res.status(404).json({ error: 'Issue not found' });
+    }
+    
+    res.json(issue);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
 module.exports = router;

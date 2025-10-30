@@ -2,15 +2,17 @@ import React from 'react';
 import './Sidebar.css';
 
 function Sidebar({ issues }) {
-  // Calculate statistics
+  // Calculate statistics - UPDATED: Changed urgent to in-progress
   const totalIssues = issues.length;
   const resolvedIssues = issues.filter(issue => issue.status === 'resolved').length;
-  const urgentIssues = issues.filter(issue => issue.category === 'roads').length;
+  const inProgressIssues = issues.filter(issue => issue.status === 'in-progress').length; // CHANGED
 
+  // Categories
   const issueCategories = {
     roads: issues.filter(issue => issue.category === 'roads').length,
     sanitation: issues.filter(issue => issue.category === 'sanitation').length,
     lights: issues.filter(issue => issue.category === 'lights').length,
+    parks: issues.filter(issue => issue.category === 'parks').length,
     other: issues.filter(issue => issue.category === 'other').length
   };
 
@@ -27,9 +29,10 @@ function Sidebar({ issues }) {
             <span className="stat-number">{resolvedIssues}</span>
             <span className="stat-label">Resolved</span>
           </div>
-          <div className="stat-card urgent">
-            <span className="stat-number">{urgentIssues}</span>
-            <span className="stat-label">Urgent</span>
+          {/* CHANGED: Urgent to In Progress */}
+          <div className="stat-card in-progress">
+            <span className="stat-number">{inProgressIssues}</span>
+            <span className="stat-label">In Progress</span>
           </div>
         </div>
       </div>
@@ -48,6 +51,10 @@ function Sidebar({ issues }) {
           <div className="category">
             <span className="category-name"> Street Lights</span>
             <span className="category-count">{issueCategories.lights}</span>
+          </div>
+          <div className="category">
+            <span className="category-name"> Parks & Public Spaces</span>
+            <span className="category-count">{issueCategories.parks}</span>
           </div>
           <div className="category">
             <span className="category-name"> Other Issues</span>
