@@ -40,7 +40,7 @@ CommunityWatch is a zone-based community issue tracking platform that enables re
 - Mongoose - MongoDB object modelling
 
 ### Deployment
-- Netlify (Frontend)
+- Vercel (Frontend)
 - Render (Backend)
 - MongoDB Atlas (Database)
 
