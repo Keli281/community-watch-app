@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react'; 
+import React, { useState, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './AdminDashboard.css';
 
@@ -8,27 +8,17 @@ const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000/api
 function AdminDashboard() {
   const [issues, setIssues] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [refreshing, setRefreshing] = useState(false); 
+  const [refreshing, setRefreshing] = useState(false);
   const [selectedStatus, setSelectedStatus] = useState('all');
   const navigate = useNavigate();
 
-  // Check if user is authenticated as admin
-  useEffect(() => {
-    const token = localStorage.getItem('adminToken');
-    if (!token) {
-      navigate('/admin');
-      return;
-    }
-    loadIssues();
-  }, [navigate, loadIssues]); 
-
-  // CHANGED: Wrapped loadIssues with useCallback
+  // loadIssues function MUST be defined BEFORE useEffect that uses it
   const loadIssues = useCallback(async (isRefresh = false) => {
     try {
       if (isRefresh) {
-        setRefreshing(true); // Show refresh spinner
+        setRefreshing(true);
       } else {
-        setLoading(true); // Show main loading
+        setLoading(true);
       }
       
       const token = localStorage.getItem('adminToken');
@@ -58,9 +48,19 @@ function AdminDashboard() {
       setIssues([]);
     } finally {
       setLoading(false);
-      setRefreshing(false); // Always stop refresh spinner
+      setRefreshing(false);
     }
-  }, [navigate]); 
+  }, [navigate]);
+
+  // Check if user is authenticated as admin - NOW this comes AFTER loadIssues is defined
+  useEffect(() => {
+    const token = localStorage.getItem('adminToken');
+    if (!token) {
+      navigate('/admin');
+      return;
+    }
+    loadIssues();
+  }, [navigate, loadIssues]);
 
   const handleStatusUpdate = async (issueId, newStatus) => {
     try {
@@ -109,7 +109,7 @@ function AdminDashboard() {
   };
 
   const handleRefresh = () => {
-    loadIssues(true); // Pass true to indicate it's a refresh
+    loadIssues(true);
   };
 
   const filteredIssues = selectedStatus === 'all' 
