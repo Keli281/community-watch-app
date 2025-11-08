@@ -37,7 +37,7 @@ function IssueForm({ coordinates, onClose, onSave }) {
         throw new Error('Failed to save issue');
       }
 
-      const savedIssue = await response.json();
+      await response.json();
       
       // Call onSave to refresh the issues list in MapComponent
       onSave(); // Changed: Just call the function without parameters
