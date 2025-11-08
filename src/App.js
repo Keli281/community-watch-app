@@ -62,7 +62,7 @@ function App() {
             <Route path="/contact" element={<Contact />} />
             <Route path="/privacy" element={<PrivacyPolicy />} />
             <Route path="/terms" element={<TermsOfService />} />
-            <Route path="/help" element={<Contact />} /> // Reuse Contact page for Help
+            <Route path="/help" element={<Contact />} /> {/* Reuse Contact page for Help */}
 
           </Routes>
         </main>

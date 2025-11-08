@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react'; 
 import { useNavigate } from 'react-router-dom';
 import './AdminDashboard.css';
 
@@ -8,7 +8,7 @@ const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000/api
 function AdminDashboard() {
   const [issues, setIssues] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [refreshing, setRefreshing] = useState(false); // NEW: Refresh loading state
+  const [refreshing, setRefreshing] = useState(false); 
   const [selectedStatus, setSelectedStatus] = useState('all');
   const navigate = useNavigate();
 
@@ -20,9 +20,10 @@ function AdminDashboard() {
       return;
     }
     loadIssues();
-  }, [navigate]);
+  }, [navigate, loadIssues]); 
 
-  const loadIssues = async (isRefresh = false) => { // UPDATED: Added isRefresh parameter
+  // CHANGED: Wrapped loadIssues with useCallback
+  const loadIssues = useCallback(async (isRefresh = false) => {
     try {
       if (isRefresh) {
         setRefreshing(true); // Show refresh spinner
@@ -59,7 +60,7 @@ function AdminDashboard() {
       setLoading(false);
       setRefreshing(false); // Always stop refresh spinner
     }
-  };
+  }, [navigate]); 
 
   const handleStatusUpdate = async (issueId, newStatus) => {
     try {
