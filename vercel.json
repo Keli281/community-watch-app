@@ -11,18 +11,8 @@
   ],
   "routes": [
     {
-      "src": "/api/(.*)",
-      "dest": "https://your-backend-url.onrender.com/api/$1"
-    },
-    {
       "src": "/(.*)",
       "dest": "/build/$1"
-    }
-  ],
-  "rewrites": [
-    {
-      "source": "/(.*)",
-      "destination": "/build/index.html"
     }
   ]
 }
