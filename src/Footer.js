@@ -14,9 +14,9 @@ function Footer() {
         
         <div className="footer-section">
           <h4>Quick Links</h4>
+          <Link to="/about">About Us</Link>
           <Link to="/dashboard">Report Issue</Link>
           <Link to="/browse">Browse Issues</Link>
-          <Link to="/about">About Us</Link>
           <Link to="/contact">Contact</Link>
         </div>
         
@@ -32,24 +32,21 @@ function Footer() {
           <h4>Connect With Us</h4>
           <p>SDG #11 - Sustainable Cities & Communities</p>
           <div className="social-links">
-            <a href="#" aria-label="Facebook">
+            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
               <FaFacebook className="social-icon" />
             </a>
-            <a href="#" aria-label="Twitter">
+            <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
               <FaTwitter className="social-icon" />
             </a>
-            <a href="#" aria-label="Instagram">
+            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
               <FaInstagram className="social-icon" />
-            </a>
-            <a href="#" aria-label="Email">
-              <FaEnvelope className="social-icon" />
             </a>
           </div>
         </div>
       </div>
       
       <div className="footer-bottom">
-        <p>&copy; 2025 CommunityWatch. Built with ❤️ for better communities.</p>
+        <p>&copy; 2025 CommunityWatch. Built with passion for better communities.</p>
       </div>
     </footer>
   );

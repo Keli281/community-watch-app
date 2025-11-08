@@ -8,23 +8,43 @@ const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000/api
 function AdminDashboard() {
   const [issues, setIssues] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [refreshing, setRefreshing] = useState(false); // NEW: Refresh loading state
   const [selectedStatus, setSelectedStatus] = useState('all');
   const navigate = useNavigate();
 
   // Check if user is authenticated as admin
   useEffect(() => {
-    const isAdmin = localStorage.getItem('isAdmin');
-    if (!isAdmin) {
+    const token = localStorage.getItem('adminToken');
+    if (!token) {
       navigate('/admin');
       return;
     }
     loadIssues();
   }, [navigate]);
 
-  const loadIssues = async () => {
+  const loadIssues = async (isRefresh = false) => { // UPDATED: Added isRefresh parameter
     try {
-      setLoading(true);
-      const response = await fetch(`${API_BASE_URL}/issues`);
+      if (isRefresh) {
+        setRefreshing(true); // Show refresh spinner
+      } else {
+        setLoading(true); // Show main loading
+      }
+      
+      const token = localStorage.getItem('adminToken');
+      
+      const response = await fetch(`${API_BASE_URL}/issues`, {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      });
+      
+      // If unauthorized, redirect to login
+      if (response.status === 401) {
+        localStorage.removeItem('adminToken');
+        localStorage.removeItem('isAdmin');
+        navigate('/admin');
+        return;
+      }
       
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
@@ -37,42 +57,58 @@ function AdminDashboard() {
       setIssues([]);
     } finally {
       setLoading(false);
+      setRefreshing(false); // Always stop refresh spinner
     }
   };
 
   const handleStatusUpdate = async (issueId, newStatus) => {
-  try {
-    const response = await fetch(`${API_BASE_URL}/issues/${issueId}/status`, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ status: newStatus })
-    });
+    try {
+      const token = localStorage.getItem('adminToken');
+      
+      const response = await fetch(`${API_BASE_URL}/issues/${issueId}/status`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify({ status: newStatus })
+      });
 
-    if (!response.ok) {
-      throw new Error('Failed to update status');
+      // If unauthorized, redirect to login
+      if (response.status === 401) {
+        localStorage.removeItem('adminToken');
+        navigate('/admin');
+        return;
+      }
+
+      if (!response.ok) {
+        throw new Error('Failed to update status');
+      }
+
+      const updatedIssue = await response.json();
+      
+      // Update the local state with the backend response
+      setIssues(prevIssues => 
+        prevIssues.map(issue => 
+          issue._id === issueId ? updatedIssue : issue
+        )
+      );
+      
+      alert(`✅ Issue status updated to: ${newStatus}`);
+    } catch (error) {
+      console.error('Error updating status:', error);
+      alert('❌ Failed to update status. Please try again.');
     }
-
-    const updatedIssue = await response.json();
-    
-    // Update the local state with the backend response
-    setIssues(prevIssues => 
-      prevIssues.map(issue => 
-        issue._id === issueId ? updatedIssue : issue
-      )
-    );
-    
-    alert(`✅ Issue status updated to: ${newStatus}`);
-  } catch (error) {
-    console.error('Error updating status:', error);
-    alert('❌ Failed to update status. Please try again.');
-  }
-};
+  };
 
   const handleLogout = () => {
+    localStorage.removeItem('adminToken');
     localStorage.removeItem('isAdmin');
     navigate('/admin');
+  };
+
+  const handleRefresh = () => {
+    loadIssues(true); // Pass true to indicate it's a refresh
   };
 
   const filteredIssues = selectedStatus === 'all' 
@@ -88,15 +124,11 @@ function AdminDashboard() {
     }
   };
 
-  const getStatusOptions = (currentStatus) => {
-    const allStatuses = ['reported', 'in-progress', 'resolved'];
-    return allStatuses.filter(status => status !== currentStatus);
-  };
-
   if (loading) {
     return (
       <div className="admin-dashboard">
         <div className="loading">
+          <div className="spinner"></div>
           <h2>Loading admin dashboard...</h2>
         </div>
       </div>
@@ -108,11 +140,11 @@ function AdminDashboard() {
       {/* Header */}
       <div className="admin-header">
         <div className="admin-header-content">
-          <h1>🏢 Admin Dashboard</h1>
+          <h1>Admin Dashboard</h1>
           <p>Manage community issues and track resolutions</p>
         </div>
         <button className="logout-btn" onClick={handleLogout}>
-          🚪 Logout
+          Logout
         </button>
       </div>
 
@@ -156,8 +188,22 @@ function AdminDashboard() {
             <option value="in-progress">In Progress</option>
             <option value="resolved">Resolved</option>
           </select>
-          <button className="refresh-btn" onClick={loadIssues}>
-            🔄 Refresh
+          <button 
+            className="refresh-btn" 
+            onClick={handleRefresh}
+            disabled={refreshing}
+          >
+            {refreshing ? (
+              <>
+                <div className="button-spinner"></div>
+                Refreshing...
+              </>
+            ) : (
+              <>
+                <i className="fas fa-sync-alt"></i>
+                Refresh
+              </>
+            )}
           </button>
         </div>
       </div>

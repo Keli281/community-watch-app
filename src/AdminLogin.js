@@ -18,25 +18,32 @@ function AdminLogin() {
     setError('');
 
     try {
-      // For now, we'll use a simple client-side check
-      // Later we'll connect to backend authentication
-      const hardcodedAdmin = {
-        email: 'admin@communitywatch.com',
-        password: 'admin123' // Temporary - we'll hash this later
-      };
+      const response = await fetch(`${API_BASE_URL}/auth/login`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, password })
+      });
 
-      if (email === hardcodedAdmin.email && password === hardcodedAdmin.password) {
-        // Store admin login status (temporary)
-        localStorage.setItem('isAdmin', 'true');
-        alert('Login successful! Redirecting to admin dashboard...');
-        navigate('/admin/dashboard');
-      } else {
-        setError('Invalid admin credentials');
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || 'Login failed');
       }
+
+      // Store token and redirect
+      localStorage.setItem('adminToken', data.token);
+      
+      // Show success state briefly before redirect
+      setLoading('success');
+      setTimeout(() => {
+        navigate('/admin/dashboard');
+      }, 1000);
+      
     } catch (error) {
-      setError('Login failed. Please try again.');
+      setError(error.message);
       console.error('Login error:', error);
-    } finally {
       setLoading(false);
     }
   };
@@ -45,7 +52,7 @@ function AdminLogin() {
     <div className="admin-login">
       <div className="login-container">
         <div className="login-header">
-          <h1>🔐 Admin Portal</h1>
+          <h1>Admin Portal</h1>
           <p>CommunityWatch Administration</p>
         </div>
 
@@ -59,7 +66,7 @@ function AdminLogin() {
               id="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              placeholder="admin@communitywatch.com"
+              placeholder="Enter admin email"
               required
               disabled={loading}
             />
@@ -80,18 +87,27 @@ function AdminLogin() {
 
           <button 
             type="submit" 
-            className="login-button"
+            className={`login-button ${loading === 'success' ? 'success' : ''}`}
             disabled={loading}
           >
-            {loading ? 'Signing In...' : 'Sign In as Admin'}
+            {loading === true ? (
+              <>
+                <div className="button-spinner"></div>
+                Signing In...
+              </>
+            ) : loading === 'success' ? (
+              <>
+                <i className="fas fa-check"></i>
+                Login Successful!
+              </>
+            ) : (
+              'Sign In as Admin'
+            )}
           </button>
         </form>
 
         <div className="login-footer">
-          <p>⚠️ Restricted Access - Authorized Personnel Only</p>
-          <p><strong>Demo Credentials:</strong><br />
-          Email: admin@communitywatch.com<br />
-          Password: admin123</p>
+          <p>⚠ Restricted Access - Authorized Personnel Only</p>
         </div>
       </div>
     </div>

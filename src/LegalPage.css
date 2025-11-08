@@ -1,0 +1,29 @@
+.legal-page {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem;
+  animation: fadeIn 0.6s ease-out;
+}
+
+.legal-content {
+  background: white;
+  padding: 3rem;
+  border-radius: 15px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+  border: 1px solid #e8e2d9;
+  line-height: 1.7;
+}
+
+.legal-content h1 {
+  color: #333333;
+  margin-bottom: 2rem;
+  border-bottom: 3px solid #8b7355;
+  padding-bottom: 0.5rem;
+  font-size: 2.2rem;
+}
+
+.legal-content p {
+  color: #666;
+  margin-bottom: 1.5rem;
+  font-size: 1.1rem;
+}

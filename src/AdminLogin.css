@@ -3,7 +3,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: #f8f4f0;
   padding: 2rem;
 }
 
@@ -11,9 +11,22 @@
   background: white;
   padding: 3rem;
   border-radius: 15px;
-  box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
   width: 100%;
   max-width: 450px;
+  border: 1px solid #e8e2d9;
+  animation: fadeIn 0.6s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .login-header {
@@ -22,14 +35,16 @@
 }
 
 .login-header h1 {
-  color: #2d3748;
+  color: #333333;
   margin-bottom: 0.5rem;
   font-size: 2rem;
+  font-weight: 700;
 }
 
 .login-header p {
-  color: #718096;
+  color: #666;
   margin: 0;
+  font-size: 1rem;
 }
 
 .login-form {
@@ -45,31 +60,49 @@
 
 .form-group label {
   margin-bottom: 0.5rem;
-  color: #2d3748;
+  color: #333333;
   font-weight: 600;
+  font-size: 0.9rem;
 }
 
 .form-group input {
   padding: 1rem;
-  border: 2px solid #e9ecef;
+  border: 2px solid #e8e2d9;
   border-radius: 8px;
   font-size: 1rem;
-  transition: border-color 0.3s;
+  transition: all 0.3s;
+  background: white;
+  color: #333333;
 }
 
 .form-group input:focus {
   outline: none;
-  border-color: #667eea;
-  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+  border-color: #8b7355;
+  box-shadow: 0 0 0 3px rgba(139, 115, 85, 0.1);
 }
 
 .form-group input:disabled {
-  background-color: #f8f9fa;
+  background-color: #f8f4f0;
   cursor: not-allowed;
+  opacity: 0.7;
+}
+
+.form-group input::placeholder {
+  color: #999;
+}
+
+.error-message {
+  background: #ffebee;
+  color: #c62828;
+  padding: 1rem;
+  border-radius: 8px;
+  border-left: 4px solid #f44336;
+  font-weight: 500;
+  font-size: 0.9rem;
 }
 
 .login-button {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: #8b7355;
   color: white;
   padding: 1rem 2rem;
   border: none;
@@ -77,13 +110,15 @@
   font-size: 1.1rem;
   font-weight: 600;
   cursor: pointer;
-  transition: all 0.3s;
-  margin-top: 1rem;
+  transition: all 0.3s ease;
+  margin-top: 0.5rem;
+  width: 100%;
 }
 
 .login-button:hover:not(:disabled) {
+  background: #756048;
   transform: translateY(-2px);
-  box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+  box-shadow: 0 4px 12px rgba(139, 115, 85, 0.3);
 }
 
 .login-button:disabled {
@@ -92,30 +127,66 @@
   transform: none;
 }
 
-.error-message {
-  background: #fed7d7;
-  color: #c53030;
-  padding: 1rem;
-  border-radius: 8px;
-  border-left: 4px solid #e53e3e;
-  font-weight: 500;
-}
-
 .login-footer {
   margin-top: 2rem;
   padding-top: 2rem;
-  border-top: 1px solid #e9ecef;
+  border-top: 1px solid #e8e2d9;
   text-align: center;
-  color: #718096;
+  color: #666;
   font-size: 0.9rem;
 }
 
 .login-footer p {
-  margin: 0.5rem 0;
+  margin: 0;
+  font-style: italic;
 }
 
-.login-footer strong {
-  color: #2d3748;
+/* Add these styles to your existing AdminLogin.css */
+
+/* Button Spinner */
+.button-spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid transparent;
+  border-top: 2px solid currentColor;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  margin-right: 8px;
+  display: inline-block;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Success State */
+.login-button.success {
+  background: #4caf50;
+}
+
+.login-button.success:hover {
+  background: #4caf50;
+  transform: none;
+  cursor: default;
+}
+
+.login-button i.fa-check {
+  margin-right: 8px;
+}
+
+/* Loading state enhancements */
+.login-button:disabled {
+  opacity: 0.8;
+  cursor: not-allowed;
+}
+
+/* Make the button content flex for better alignment */
+.login-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
 }
 
 /* Responsive Design */
@@ -126,5 +197,14 @@
   
   .login-container {
     padding: 2rem 1.5rem;
+  }
+  
+  .login-header h1 {
+    font-size: 1.7rem;
+  }
+  
+  .login-button {
+    padding: 0.9rem 1.5rem;
+    font-size: 1rem;
   }
 }

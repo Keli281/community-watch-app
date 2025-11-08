@@ -16,7 +16,8 @@ mongoose.connect(process.env.MONGODB_URI)
   .catch(err => console.log('❌ MongoDB connection error:', err));
 
 // Routes
-app.use('/api/issues', require('./routes/issueRoutes')); // ← ADD THIS LINE
+app.use('/api/issues', require('./routes/issueRoutes'));
+app.use('/api/auth', require('./routes/authRoutes').router);
 
 // Basic route to test server
 app.get('/api/test', (req, res) => {

@@ -4,29 +4,30 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.7);
+  background: rgba(0, 0, 0, 0.6);
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 1000;
   padding: 1rem;
+  animation: fadeIn 0.3s ease-out;
 }
 
 .form-container {
   background: white;
-  padding: 2rem;
+  padding: 2.5rem;
   border-radius: 15px;
   width: 90%;
   max-width: 500px;
-  box-sizing: border-box;
-  box-shadow: 0 20px 40px rgba(0,0,0,0.3);
-  animation: formSlideIn 0.3s ease-out;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+  animation: modalSlideIn 0.3s ease-out;
+  border: 1px solid #e8e2d9;
 }
 
-@keyframes formSlideIn {
+@keyframes modalSlideIn {
   from {
     opacity: 0;
-    transform: translateY(-50px) scale(0.9);
+    transform: translateY(-30px) scale(0.95);
   }
   to {
     opacity: 1;
@@ -36,12 +37,13 @@
 
 .form-container h3 {
   margin-top: 0;
-  color: #2d3748;
+  color: #333333;
   text-align: center;
   font-size: 1.5rem;
   margin-bottom: 1.5rem;
-  border-bottom: 2px solid #667eea;
+  border-bottom: 2px solid #8b7355;
   padding-bottom: 0.5rem;
+  font-weight: 600;
 }
 
 .form-container input,
@@ -50,30 +52,33 @@
   width: 100%;
   padding: 1rem;
   margin: 0.8rem 0;
-  border: 2px solid #e9ecef;
+  border: 2px solid #e8e2d9;
   border-radius: 8px;
   box-sizing: border-box;
   font-family: inherit;
   font-size: 1rem;
   transition: all 0.3s ease;
+  background: white;
+  color: #333333;
 }
 
 .form-container input:focus,
 .form-container textarea:focus,
 .form-container select:focus {
   outline: none;
-  border-color: #667eea;
-  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+  border-color: #8b7355;
+  box-shadow: 0 0 0 3px rgba(139, 115, 85, 0.1);
 }
 
 .form-container textarea {
   resize: vertical;
-  min-height: 80px;
+  min-height: 100px;
+  font-family: inherit;
 }
 
 .form-container input::placeholder,
 .form-container textarea::placeholder {
-  color: #a0aec0;
+  color: #999;
 }
 
 .form-buttons {
@@ -87,36 +92,38 @@
   padding: 1rem 2rem;
   border: none;
   border-radius: 8px;
-  cursor: pointer;
   font-size: 1rem;
   font-weight: 600;
+  cursor: pointer;
   transition: all 0.3s ease;
+  min-width: 120px;
 }
 
 .form-buttons button[type="submit"] {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: #8b7355;
   color: white;
 }
 
 .form-buttons button[type="submit"]:hover {
+  background: #756048;
   transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+  box-shadow: 0 4px 12px rgba(139, 115, 85, 0.3);
 }
 
 .form-buttons button[type="button"] {
-  background: #6c757d;
+  background: #666;
   color: white;
 }
 
 .form-buttons button[type="button"]:hover {
-  background: #5a6268;
-  transform: translateY(-1px);
+  background: #555;
+  transform: translateY(-2px);
 }
 
 /* Responsive Design */
 @media (max-width: 768px) {
   .form-container {
-    padding: 1.5rem;
+    padding: 2rem 1.5rem;
     margin: 1rem;
   }
   
@@ -126,5 +133,10 @@
   
   .form-buttons button {
     width: 100%;
+    min-width: auto;
+  }
+  
+  .form-container h3 {
+    font-size: 1.3rem;
   }
 }

@@ -8,6 +8,9 @@ import BrowseIssues from './BrowseIssues';
 import About from './About';
 import AdminLogin from './AdminLogin';
 import AdminDashboard from './AdminDashboard';
+import Contact from './Contact';
+import PrivacyPolicy from './PrivacyPolicy'; 
+import TermsOfService from './TermsOfService'; 
 import './App.css';
 
 // API base URL with fallback for local development
@@ -56,6 +59,11 @@ function App() {
             <Route path="/about" element={<About />} />
             <Route path="/admin" element={<AdminLogin />} />
             <Route path="/admin/dashboard" element={<AdminDashboard />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/privacy" element={<PrivacyPolicy />} />
+            <Route path="/terms" element={<TermsOfService />} />
+            <Route path="/help" element={<Contact />} /> // Reuse Contact page for Help
+
           </Routes>
         </main>
         <Footer />

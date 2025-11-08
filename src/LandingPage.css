@@ -2,25 +2,22 @@
   min-height: 100vh;
 }
 
-/* Hero Section */
 .hero {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 4rem;
   align-items: center;
   padding: 4rem 2rem;
-  max-width: 1200px;
+  max-width: 1400px;
   margin: 0 auto;
   min-height: 80vh;
 }
 
 .hero-content h1 {
   font-size: 3rem;
-  margin-bottom: 1rem;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  margin-bottom: 1.5rem;
+  color: #333333;
+  line-height: 1.2;
 }
 
 .hero-content p {
@@ -44,37 +41,12 @@
   display: block;
   font-size: 2rem;
   font-weight: bold;
-  color: #667eea;
+  color: #8b7355;
 }
 
 .hero-stats .label {
   font-size: 0.9rem;
   color: #666;
-}
-
-.cta-button {
-  display: inline-block;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
-  padding: 1rem 2rem;
-  border-radius: 50px;
-  text-decoration: none;
-  font-weight: bold;
-  font-size: 1.1rem;
-  transition: transform 0.3s, box-shadow 0.3s;
-  border: none;
-  cursor: pointer;
-}
-
-.cta-button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
-}
-
-.cta-button.secondary {
-  background: white;
-  color: #667eea;
-  border: 2px solid #667eea;
 }
 
 .hero-image {
@@ -83,31 +55,77 @@
   align-items: center;
 }
 
-.placeholder-image {
+.city-night-image {
   width: 100%;
   height: 400px;
-  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  border-radius: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+  background: 
+    linear-gradient(
+      rgba(0, 0, 0, 0.4), 
+      rgba(0, 0, 0, 0.4)
+    ),
+    url('https://images.unsplash.com/photo-1519501025264-65ba15a82390?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1964&q=80') 
+    center/cover no-repeat;
+}
+
+.image-overlay {
+  text-align: center;
+  color: white;
+  z-index: 2;
+  padding: 2rem;
+}
+
+.image-overlay h3 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  font-weight: 600;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+.image-overlay p {
+  font-size: 1.2rem;
+  margin: 0;
+  opacity: 0.9;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+}
+
+.hero-visual {
+  width: 100%;
+  height: 400px;
+  background: linear-gradient(135deg, #8b7355 0%, #a89070 100%);
   border-radius: 20px;
   display: flex;
   justify-content: center;
   align-items: center;
   color: white;
-  font-size: 1.5rem;
-  font-weight: bold;
-  box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+  box-shadow: 0 20px 40px rgba(139, 115, 85, 0.2);
 }
 
-/* Features Section */
+.visual-content {
+  text-align: center;
+}
+
+.visual-content h3 {
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+}
+
 .features {
   padding: 6rem 2rem;
-  background: #f8f9fa;
+  background: #f8f4f0;
   text-align: center;
 }
 
 .features h2 {
   font-size: 2.5rem;
   margin-bottom: 3rem;
-  color: #333;
+  color: #333333;
 }
 
 .features-grid {
@@ -119,26 +137,26 @@
 }
 
 .feature-card {
-  background: white;
-  padding: 2rem;
-  border-radius: 15px;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-  transition: transform 0.3s;
-}
-
-.feature-card:hover {
-  transform: translateY(-5px);
+  padding: 2.5rem 2rem;
+  text-align: center;
 }
 
 .feature-icon {
-  font-size: 3rem;
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
+  color: #8b7355;
+  font-size: 2.5rem;
+  transition: all 0.3s ease;
+}
+
+.feature-card:hover .feature-icon {
+  transform: scale(1.1);
+  color: #756048;
 }
 
 .feature-card h3 {
   font-size: 1.5rem;
   margin-bottom: 1rem;
-  color: #333;
+  color: #333333;
 }
 
 .feature-card p {
@@ -146,35 +164,34 @@
   line-height: 1.6;
 }
 
-/* CTA Section */
 .cta-section {
   padding: 6rem 2rem;
   text-align: center;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
+  background: white;
 }
 
-.cta-section h2 {
+.cta-content h2 {
   font-size: 2.5rem;
   margin-bottom: 1rem;
+  color: #333333;
 }
 
-.cta-section p {
+.cta-content p {
   font-size: 1.2rem;
   margin-bottom: 2rem;
-  opacity: 0.9;
+  color: #666;
 }
 
-/* Responsive Design */
 @media (max-width: 768px) {
   .hero {
     grid-template-columns: 1fr;
     text-align: center;
     padding: 2rem 1rem;
+    gap: 2rem;
   }
   
   .hero-content h1 {
-    font-size: 2rem;
+    font-size: 2.2rem;
   }
   
   .hero-stats {
@@ -186,7 +203,11 @@
     grid-template-columns: 1fr;
   }
   
-  .placeholder-image {
+  .hero-visual {
     height: 300px;
+  }
+  
+  .features h2 {
+    font-size: 2rem;
   }
 }

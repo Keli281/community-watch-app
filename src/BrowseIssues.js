@@ -6,6 +6,7 @@ import './BrowseIssues.css';
 const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
 
 function BrowseIssues() {
+  const [loading, setLoading] = useState(true); // KEEP THIS ONE
   const [issues, setIssues] = useState([]);
   const [filteredIssues, setFilteredIssues] = useState([]);
   const [filters, setFilters] = useState({
@@ -14,7 +15,7 @@ function BrowseIssues() {
     sortBy: 'newest'
   });
   const [searchTerm, setSearchTerm] = useState('');
-  const [loading, setLoading] = useState(true);
+  // REMOVED THE DUPLICATE: const [loading, setLoading] = useState(true);
   const [selectedIssue, setSelectedIssue] = useState(null);
   const [commentText, setCommentText] = useState('');
   const [showCommentModal, setShowCommentModal] = useState(false);
@@ -184,6 +185,10 @@ function BrowseIssues() {
       case 'roads': return '🚧';
       case 'lights': return '💡';
       case 'sanitation': return '🗑️';
+      case 'parks': return '🌳';
+      case 'insecurity': return '🚨';
+      case 'power': return '⚡';
+      case 'other': return '📋';
       default: return '📋';
     }
   };
@@ -198,32 +203,33 @@ function BrowseIssues() {
     });
   };
 
-  // REPLACE the formatLocation function with this:
-const formatLocation = (issue) => {
-  // Priority 1: Use the human-readable location if available
-  if (issue.location && issue.location.trim() !== '') {
-    return issue.location;
-  }
-  
-  // Priority 2: Use zone name if available
-  if (issue.zone && issue.zone !== 'General') {
-    return `${issue.zone.charAt(0).toUpperCase() + issue.zone.slice(1)} Zone`;
-  }
-  
-  // Priority 3: Fallback to coordinates (but this shouldn't happen with our new form)
-  if (issue.coordinates) {
-    const lat = issue.coordinates.lat?.toFixed(4) || 'N/A';
-    const lng = issue.coordinates.lng?.toFixed(4) || 'N/A';
-    return `Coordinates: ${lat}, ${lng}`;
-  }
-  
-  return 'Location not specified';
-};
+  const formatLocation = (issue) => {
+    // Priority 1: Use the human-readable location if available
+    if (issue.location && issue.location.trim() !== '') {
+      return issue.location;
+    }
+    
+    // Priority 2: Use zone name if available
+    if (issue.zone && issue.zone !== 'General') {
+      return `${issue.zone.charAt(0).toUpperCase() + issue.zone.slice(1)} Zone`;
+    }
+    
+    // Priority 3: Fallback to coordinates 
+    if (issue.coordinates) {
+      const lat = issue.coordinates.lat?.toFixed(4) || 'N/A';
+      const lng = issue.coordinates.lng?.toFixed(4) || 'N/A';
+      return `Coordinates: ${lat}, ${lng}`;
+    }
+    
+    return 'Location not specified';
+  };
+
   if (loading) {
     return (
       <div className="browse-issues">
-        <div className="loading">
-          <h2>Loading issues...</h2>
+        <div className="loading-spinner">
+          <div className="spinner"></div>
+          <p>Loading issues...</p>
         </div>
       </div>
     );
@@ -232,23 +238,23 @@ const formatLocation = (issue) => {
   return (
     <div className="browse-issues">
       {/* Header Section */}
-      <div className="browse-header">
+      <div className="browse-header card fade-in">
         <h1>Community Issues</h1>
         <p>Browse, support, and track neighborhood issues</p>
         
         <div className="header-actions">
-          <Link to="/dashboard" className="report-button">
-            📝 Report New Issue
+          <Link to="/dashboard" className="btn-primary">
+             Report New Issue
           </Link>
         </div>
       </div>
 
       {/* Filters Section */}
-      <div className="filters-section">
+      <div className="filters-section card">
         <div className="search-box">
           <input
             type="text"
-            placeholder="Search issues by title, description, or location..."
+            placeholder="Search issues by title or description..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             className="search-input"
@@ -265,6 +271,9 @@ const formatLocation = (issue) => {
             <option value="roads">Roads & Potholes</option>
             <option value="lights">Street Lights</option>
             <option value="sanitation">Sanitation</option>
+            <option value="parks">Parks & Public Spaces</option>
+            <option value="insecurity">Security Issues</option>
+            <option value="power">Power Outages</option>
             <option value="other">Other</option>
           </select>
 
@@ -304,7 +313,7 @@ const formatLocation = (issue) => {
           </div>
         ) : (
           filteredIssues.map(issue => (
-            <div key={issue._id} className="issue-card">
+            <div key={issue._id} className="issue-card card">
               <div className="issue-header">
                 <span className="category-icon">
                   {getCategoryIcon(issue.category)}
@@ -323,7 +332,7 @@ const formatLocation = (issue) => {
               <h3 className="issue-title">{issue.title}</h3>
               <p className="issue-description">{issue.description}</p>
 
-              {/* NEW: Location Display */}
+              {/* Location Display */}
               <div className="issue-location">
                 <span className="location-icon">📍</span>
                 <span className="location-text">{formatLocation(issue)}</span>
@@ -367,7 +376,7 @@ const formatLocation = (issue) => {
               <div className="issue-preview">
                 <strong>{selectedIssue.title}</strong>
                 <p>{selectedIssue.description}</p>
-                {/* NEW: Show location in modal too */}
+                {/* Show location in modal too */}
                 <p className="issue-location-modal">
                   <strong>📍 Location:</strong> {formatLocation(selectedIssue)}
                 </p>

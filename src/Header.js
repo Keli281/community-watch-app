@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { FaBars, FaTimes } from 'react-icons/fa';
 import './Header.css';
 
 function Header({ issues }) {
@@ -17,7 +16,6 @@ function Header({ issues }) {
     setIsMobileMenuOpen(false);
   };
 
-  // Check if link is active for styling
   const isActiveLink = (path) => {
     return location.pathname === path;
   };
@@ -28,18 +26,24 @@ function Header({ issues }) {
         {/* Logo */}
         <div className="logo">
           <Link to="/" className="logo-link">
-            <h1>🏙️ CommunityWatch</h1>
+            <h1>CommunityWatch</h1>
             <span className="logo-subtitle">Connecting Communities, Fixing Neighborhoods</span>
           </Link>
         </div>
         
-        {/* Desktop Navigation */}
+        {/* Desktop Navigation - About moved right after Home */}
         <nav className="navigation desktop-nav">
           <Link 
             to="/" 
             className={`nav-link ${isActiveLink('/') ? 'active' : ''}`}
           >
             Home
+          </Link>
+          <Link 
+            to="/about" 
+            className={`nav-link ${isActiveLink('/about') ? 'active' : ''}`}
+          >
+            About
           </Link>
           <Link 
             to="/dashboard" 
@@ -52,12 +56,6 @@ function Header({ issues }) {
             className={`nav-link ${isActiveLink('/browse') ? 'active' : ''}`}
           >
             Browse Issues
-          </Link>
-          <Link 
-            to="/about" 
-            className={`nav-link ${isActiveLink('/about') ? 'active' : ''}`}
-          >
-            About
           </Link>
           <Link 
             to="/admin" 
@@ -79,13 +77,15 @@ function Header({ issues }) {
           </div>
         </div>
 
-        {/* Mobile Hamburger Button */}
+        {/* Mobile Menu Button */}
         <button className="mobile-menu-btn" onClick={toggleMobileMenu}>
-          {isMobileMenuOpen ? <FaTimes /> : <FaBars />}
+          <span className="menu-bar"></span>
+          <span className="menu-bar"></span>
+          <span className="menu-bar"></span>
         </button>
       </div>
 
-      {/* Mobile Navigation Menu */}
+      {/* Mobile Navigation Menu - About moved right after Home */}
       <div className={`mobile-nav ${isMobileMenuOpen ? 'mobile-nav-open' : ''}`}>
         <div className="mobile-stats">
           <div className="stat">
@@ -103,35 +103,35 @@ function Header({ issues }) {
           className={`mobile-nav-link ${isActiveLink('/') ? 'active' : ''}`}
           onClick={closeMobileMenu}
         >
-          🏠 Home
-        </Link>
-        <Link 
-          to="/dashboard" 
-          className={`mobile-nav-link ${isActiveLink('/dashboard') ? 'active' : ''}`}
-          onClick={closeMobileMenu}
-        >
-          🗺️ Dashboard
-        </Link>
-        <Link 
-          to="/browse" 
-          className={`mobile-nav-link ${isActiveLink('/browse') ? 'active' : ''}`}
-          onClick={closeMobileMenu}
-        >
-          📋 Browse Issues
+          Home
         </Link>
         <Link 
           to="/about" 
           className={`mobile-nav-link ${isActiveLink('/about') ? 'active' : ''}`}
           onClick={closeMobileMenu}
         >
-          ℹ️ About
+          About
+        </Link>
+        <Link 
+          to="/dashboard" 
+          className={`mobile-nav-link ${isActiveLink('/dashboard') ? 'active' : ''}`}
+          onClick={closeMobileMenu}
+        >
+          Dashboard
+        </Link>
+        <Link 
+          to="/browse" 
+          className={`mobile-nav-link ${isActiveLink('/browse') ? 'active' : ''}`}
+          onClick={closeMobileMenu}
+        >
+          Browse Issues
         </Link>
         <Link 
           to="/admin" 
           className="mobile-nav-link admin-link"
           onClick={closeMobileMenu}
         >
-          🔐 Admin Login
+          Admin Login
         </Link>
       </div>
     </header>

@@ -5,21 +5,23 @@ function Sidebar({ issues }) {
   // Calculate statistics - UPDATED: Changed urgent to in-progress
   const totalIssues = issues.length;
   const resolvedIssues = issues.filter(issue => issue.status === 'resolved').length;
-  const inProgressIssues = issues.filter(issue => issue.status === 'in-progress').length; // CHANGED
+  const inProgressIssues = issues.filter(issue => issue.status === 'in-progress').length;
 
-  // Categories
+  // UPDATED: Added insecurity and power categories
   const issueCategories = {
     roads: issues.filter(issue => issue.category === 'roads').length,
     sanitation: issues.filter(issue => issue.category === 'sanitation').length,
     lights: issues.filter(issue => issue.category === 'lights').length,
     parks: issues.filter(issue => issue.category === 'parks').length,
+    insecurity: issues.filter(issue => issue.category === 'insecurity').length, // NEW
+    power: issues.filter(issue => issue.category === 'power').length, // NEW
     other: issues.filter(issue => issue.category === 'other').length
   };
 
   return (
     <div className="sidebar">
       <div className="sidebar-section">
-        <h3>📊 Live Statistics</h3>
+        <h3> Live Statistics</h3>
         <div className="stats-grid">
           <div className="stat-card">
             <span className="stat-number">{totalIssues}</span>
@@ -36,9 +38,23 @@ function Sidebar({ issues }) {
           </div>
         </div>
       </div>
+      
+      <div className="sidebar-section">
+        <h3>Resolution Progress</h3>
+        <div className="progress-item">
+          <span>Issue Resolution Rate</span>
+          <div className="progress-bar">
+            <div 
+              className="progress-fill" 
+              style={{ width: `${totalIssues > 0 ? (resolvedIssues / totalIssues) * 100 : 0}%` }}
+            ></div>
+          </div>
+          <small>{totalIssues > 0 ? Math.round((resolvedIssues / totalIssues) * 100) : 0}% resolved</small>
+        </div>
+      </div>
 
       <div className="sidebar-section">
-        <h3>🗂️ Issue Categories</h3>
+        <h3> Issue Categories</h3>
         <div className="categories">
           <div className="category">
             <span className="category-name"> Roads & Potholes</span>
@@ -56,6 +72,15 @@ function Sidebar({ issues }) {
             <span className="category-name"> Parks & Public Spaces</span>
             <span className="category-count">{issueCategories.parks}</span>
           </div>
+          {/* NEW CATEGORIES */}
+          <div className="category">
+            <span className="category-name"> Security Issues</span>
+            <span className="category-count">{issueCategories.insecurity}</span>
+          </div>
+          <div className="category">
+            <span className="category-name"> Power Outages</span>
+            <span className="category-count">{issueCategories.power}</span>
+          </div>
           <div className="category">
             <span className="category-name"> Other Issues</span>
             <span className="category-count">{issueCategories.other}</span>
@@ -64,7 +89,7 @@ function Sidebar({ issues }) {
       </div>
 
       <div className="sidebar-section">
-        <h3>💡 How It Works</h3>
+        <h3> How It Works</h3>
         <div className="instructions">
           <p>1. <strong>Click anywhere</strong> on the map to place a pin</p>
           <p>2. <strong>Report the issue</strong> with details and category</p>

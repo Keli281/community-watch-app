@@ -3,19 +3,34 @@
   grid-template-columns: 300px 1fr;
   gap: 2rem;
   align-items: start;
+  min-height: calc(100vh - 200px); /* NEW: Full viewport height minus header/footer */
 }
 
 .map-section {
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  height: 100%;
 }
 
 .map-container {
   background: white;
-  border-radius: 10px;
+  border-radius: 12px;
   padding: 1rem;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+  border: 1px solid #e8e2d9;
+  height: 100%; /* CHANGED: Take full available height */
+  min-height: 600px; /* NEW: Minimum height */
+  display: flex;
+  flex-direction: column;
+  flex: 1; /* NEW: Grow to fill space */
+}
+
+/* Make the actual map take full available space */
+.map-container .leaflet-container {
+  flex: 1;
+  border-radius: 8px;
+  min-height: 500px; /* NEW: Ensure map has good minimum height */
 }
 
 /* Responsive design */
@@ -23,5 +38,11 @@
   .map-layout {
     grid-template-columns: 1fr;
     gap: 1rem;
+    min-height: auto;
+  }
+  
+  .map-container {
+    height: 500px; /* Good mobile height */
+    min-height: 500px;
   }
 }

@@ -20,7 +20,6 @@ CommunityWatch is a zone-based community issue tracking platform that enables re
 - Anonymous Reporting - No account required
 - Real-time Issue Tracking - Monitor resolution progress  
 - Community Engagement - Upvote and comment on issues
-- Zone-based Visualization - Color-coded problem areas
 
 ### For Administrators 
 - Centralized Dashboard - View all reported issues
@@ -56,28 +55,48 @@ CommunityWatch is a zone-based community issue tracking platform that enables re
 ## Project Structure
 
 communitywatch-app/
-├──  LICENSE
-├──  README.md
-├──  package.json
-├──  package-lock.json
-├──  public/
-│   ├──  index.html
-│   ├──  favicon.ico
-│   ├──  logo192.png
-│   ├──  logo512.png
-│   ├──  manifest.json
-│   └──  robots.txt
-├── 📁 src/
-│   ├──  App.js
-│   ├──  MapComponent.js
-│   ├──  MapComponent.css
-│   ├──  IssueForm.js
-│   ├──  IssueForm.css
-│   ├──  index.js
-│   ├──  App.css
-│   ├──  index.css
-│   └──  logo.svg
-└──  .gitignore
+│
+├── backend/
+│   ├── models/
+│   │   ├── Issue.js
+│   │   └── Admin.js
+│   ├── routes/
+│   │   ├── issueRoutes.js
+│   │   └── authRoutes.js
+│   ├── scripts/
+│   │   └── setupAdmin.js
+│   ├── .env
+│   ├── server.js
+│
+├── public/
+│   ├── index.html
+│   ├── favicon.png
+│   ├── manifest.json
+│   └── robots.txt
+│
+├── src/
+│   ├── Header.js & Header.css
+│   ├── Footer.js & Footer.css
+│   ├── Sidebar.js & Sidebar.css
+│   ├── MapComponent.js & MapComponent.css
+│   ├── IssueForm.js & IssueForm.css
+│   └── BrowseIssues.js & BrowseIssues.css
+│   ├── LandingPage.js & LandingPage.css
+│   ├── About.js & About.css
+│   ├── Contact.js & Contact.css
+│   ├── AdminLogin.js & AdminLogin.css
+│   ├── AdminDashboard.js & AdminDashboard.css
+│   ├── PrivacyPolicy.js
+│   ├── TermsOfService.js
+│   └── LegalPage.css
+│   ├── App.js & App.css
+│   ├── index.js & index.css
+│
+├── .env
+├── .gitignore
+├── vercel.json
+├── package.json
+└── README.md
 
 ## Installation
 
@@ -91,10 +110,11 @@ git clone https://github.com/yourusername/CommunityWatch.git
 cd CommunityWatch
 npm install
 npm start
+cd backend 
+node server.js
 ```
 
 ## Future Enhancements
-- User authentication system
 - Image upload for issue evidence
 - Mobile app development
 - SMS/Email notifications

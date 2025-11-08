@@ -91,9 +91,11 @@ function IssueForm({ coordinates, onClose, onSave }) {
           >
             <option value="">Select Category</option>
             <option value="roads">Roads & Potholes</option>
-            <option value="sanitation">Sanitation & Garbage</option>
+            <option value="sanitation">Sanitation</option>
             <option value="lights">Street Lights</option>
             <option value="parks">Parks & Public Spaces</option>
+            <option value="insecurity">Security Issues</option>
+            <option value="power">Power Outages</option>
             <option value="other">Other Issues</option>
           </select>
           

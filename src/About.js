@@ -19,27 +19,57 @@ function About() {
             creating more responsive and engaged communities.
           </p>
         </section>
+        <section className="vision-section">
+          <h2>Our Vision</h2>
+          <p>
+            We envision a world where every community has the tools to identify, report, and resolve 
+            local issues efficiently. By fostering collaboration between residents and authorities, 
+            we aim to enhance urban living standards and promote sustainable development.
+          </p>
+        </section>
 
         <section className="features-section">
           <h2>How We Help Communities</h2>
           <div className="features-grid">
             <div className="feature-item">
-              <div className="feature-icon">📍</div>
+              <div className="feature-icon">
+                <i className="fas fa-flag"></i>
+              </div>
               <h3>Easy Issue Reporting</h3>
               <p>Residents can report neighborhood issues quickly without creating accounts, making the process accessible to everyone.</p>
             </div>
             <div className="feature-item">
-              <div className="feature-icon">👁️</div>
+              <div className="feature-icon">
+                <i className="fas fa-eye"></i>
+              </div>
               <h3>Transparent Tracking</h3>
               <p>Track issue progress from reported to resolved in real-time with full visibility for the entire community.</p>
             </div>
             <div className="feature-item">
-              <div className="feature-icon">💬</div>
+              <div className="feature-icon">
+                <i className="fas fa-comments"></i>
+              </div>
               <h3>Community Engagement</h3>
               <p>Upvote and comment on issues to prioritize community needs and share additional information.</p>
             </div>
             <div className="feature-item">
-              <div className="feature-icon">🗺️</div>
+              <div className="feature-icon">
+                <i className="fas fa-chart-bar"></i>
+              </div>
+              <h3>Data-Driven Insights</h3>
+              <p>Local authorities can leverage issue data to identify trends and allocate resources effectively.</p>
+            </div>
+            <div className="feature-item">
+              <div className="feature-icon">
+                <i className="fas fa-map-marker-alt"></i>
+              </div>
+              <h3>Interactive Mapping</h3>
+              <p>Visualize reported issues on an interactive map for better situational awareness and response planning.</p>
+            </div>
+            <div className="feature-item">
+              <div className="feature-icon">
+                <i className="fas fa-map"></i>
+              </div>
               <h3>Zone-Based Management</h3>
               <p>Organize and visualize issues by geographical zones for better resource allocation and planning.</p>
             </div>
@@ -54,7 +84,10 @@ function About() {
             to create tools that empower residents and make local governance more accessible and effective.
           </p>
           <div className="sdg-badge">
-            <h3>🌍 Supporting UN Sustainable Development Goal #11</h3>
+            <div className="sdg-icon">
+              <i className="fas fa-globe"></i>
+            </div>
+            <h3>Supporting UN Sustainable Development Goal #11</h3>
             <p>Sustainable Cities and Communities</p>
           </div>
         </section>
