@@ -9,8 +9,7 @@ CommunityWatch is a zone-based community issue tracking platform that enables re
 
 ## Live Demo
 
-- **Frontend**: [Coming Soon]
-- **Backend API**: [Coming Soon] 
+- **Live Web App**: [[View Live Web App Here](https://communitywatch.vercel.app)]
 - **Pitch Deck**: [[View Pitch Deck Here](https://www.canva.com/design/DAG0Rs1xhdM/M9auBv4CtpLwpYWDVO9CnQ/view?utm_content=DAG0Rs1xhdM&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h65c9c25458)]
 
 ## Features
