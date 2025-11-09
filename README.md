@@ -51,6 +51,9 @@ CommunityWatch is a zone-based community issue tracking platform that enables re
 3. **Track Progress** - Monitor status updates
 4. **Engage** - Support issues through upvotes and comments
 
+##  Testing
+For admin testing credentials, please refer to `TESTING_INSTRUCTIONS.md`
+
 ## Project Structure
 
 communitywatch-app/
