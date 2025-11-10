@@ -11,15 +11,15 @@ function LandingPage() {
           <p>CommunityWatch empowers residents to report neighborhood issues and track their resolution in real-time.</p>
           <div className="hero-stats">
             <div className="stat">
-              <span className="number">4,000+</span>
+              <span className="number">500+</span>
               <span className="label">Active Users</span>
             </div>
             <div className="stat">
-              <span className="number">10,000+</span>
+              <span className="number">5,000+</span>
               <span className="label">Positive Reviews</span>
             </div>
             <div className="stat">
-              <span className="number">15,000+</span>
+              <span className="number">1,500+</span>
               <span className="label">Issues Resolved</span>
             </div>
           </div>
